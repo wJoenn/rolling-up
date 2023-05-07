@@ -10,14 +10,15 @@
     "lint": "cd frontend && yarn lint",
     "type-check": "cd frontend && vue-tsc",
 
+    "c": "cd backend && rails c",
     "d": "cd backend && rails d",
     "g": "cd backend && rails g",
     "rails:serve": "cd backend && rails s",
-    "rails:bundle": "cd backend && bundle",
-    "rails:drop": "cd backend && rails db:drop",
-    "rails:create": "cd backend && rails db:create",
-    "rails:migrate": "cd backend && rails db:migrate",
-    "rails:seed": "cd backend && rails db:seed",
+    "bundle": "cd backend && bundle",
+    "db:drop": "cd backend && rails db:drop",
+    "db:create": "cd backend && rails db:create",
+    "db:migrate": "cd backend && rails db:migrate",
+    "db:seed": "cd backend && rails db:seed",
     "rubocop": "cd backend && rubocop"
   },
   "dependencies": {
