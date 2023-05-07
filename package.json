@@ -1,0 +1,26 @@
+{
+  "name": "app",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently --kill-others -n Rails:,Vite:, -c red,green, \"yarn rails:serve\" \"yarn vite:serve\"",
+
+    "vite:serve": "cd frontend && vite",
+    "vite:build": "cd frontend && vite build",
+    "vite:install": "cd frontend && yarn",
+    "lint": "cd frontend && yarn lint",
+    "type-check": "cd frontend && vue-tsc",
+
+    "d": "cd backend && rails d",
+    "g": "cd backend && rails g",
+    "rails:serve": "cd backend && rails s",
+    "rails:bundle": "cd backend && bundle",
+    "rails:drop": "cd backend && rails db:drop",
+    "rails:create": "cd backend && rails db:create",
+    "rails:migrate": "cd backend && rails db:migrate",
+    "rails:seed": "cd backend && rails db:seed",
+    "rubocop": "cd backend && rubocop"
+  },
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  }
+}
