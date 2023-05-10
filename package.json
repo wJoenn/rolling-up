@@ -19,6 +19,7 @@
     "db:create": "cd api && rails db:create",
     "db:migrate": "cd api && rails db:migrate",
     "db:seed": "cd api && rails db:seed",
+    "rspec": "cd api && rspec",
     "rubocop": "cd api && rubocop"
   },
   "dependencies": {
