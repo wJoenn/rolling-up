@@ -8,6 +8,10 @@ Bundler.require(*Rails.groups)
 
 module RollingUp
   class Application < Rails::Application
+    config.generators do |generate|
+      generate.test_framework :rspec
+    end
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
