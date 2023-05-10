@@ -13,6 +13,7 @@
     "c": "cd api && rails c",
     "d": "cd api && rails d",
     "g": "cd api && rails g",
+    "rails": "cd api && rails",
     "rails:serve": "cd api && rails s",
     "bundle": "cd api && bundle",
     "db:drop": "cd api && rails db:drop",
