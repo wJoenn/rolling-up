@@ -31,5 +31,15 @@ RSpec.describe User, type: :model do
     it "requires a valid password" do
       test_user_with_invalid_params(email:, password: "12345")
     end
+
+    it "assigns a unique JTI token when created" do
+      expect(user.jti.present?).to be_truthy
+      expect(user.jti).to be_a String
+
+      jti = user.jti
+      User.create(email: "another@example.com", password:, jti:)
+      unique_jtis = User.all.map(&:jti).uniq
+      expect(unique_jtis.length).to eq(2)
+    end
   end
 end
