@@ -31,5 +31,5 @@ else
   echo -e "\e[32m\nSUCCESS: Your Rubocop tests were successful\e[0m"
 fi
 
-echo -e "\e[32m\nAll your tests were successful\e[0m"
+echo -e "\e[32m\nAll your linters were successful\e[0m"
 exit 0
