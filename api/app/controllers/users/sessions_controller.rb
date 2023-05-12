@@ -14,7 +14,7 @@ class Users::SessionsController < Devise::SessionsController
   def login_successful
     render json: {
       message: "Logged in sucessfully.",
-      data: current_user.as_json(except: :jti)
+      user: current_user.as_json(except: :jti)
     }, status: :ok
   end
 

@@ -31,7 +31,7 @@ RSpec.describe "Users::Registrations", type: :request do
       end
 
       it "responds with the newly created user and a success message" do
-        expect(response.parsed_body.key?("data")).to be_truthy
+        expect(response.parsed_body.key?("user")).to be_truthy
         expect(response.parsed_body["message"]).to eq("Signed up successfully.")
       end
 

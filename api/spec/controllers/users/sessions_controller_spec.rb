@@ -27,7 +27,7 @@ RSpec.describe "Users::Sessions", type: :request do
       it_behaves_like "a JSON object"
 
       it "responds with the logged in user and a success message" do
-        expect(response.parsed_body.key?("data")).to be_truthy
+        expect(response.parsed_body.key?("user")).to be_truthy
         expect(response.parsed_body["message"]).to eq("Logged in sucessfully.")
       end
 
