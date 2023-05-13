@@ -72,16 +72,14 @@ const useUserStore = defineStore("UserStore", () => {
     }
   }
 
-  const signup = (params: RegistrationParams): Promise<boolean> => postRequest("/users/sign_up", params)
+  const signup = (params: RegistrationParams): Promise<boolean> => postRequest("/users", params)
 
   // Private
 
   const handleError = (error: any) => {
     let message: string = error.message
-    if (error.response) {
-      errors.value = error.response.data.errors
-      message = error.response.data.message
-    }
+    if (error.response.data.errors) errors.value = error.response.data.errors
+    if (error.response.data.message) message = error.response.data.message
 
     console.log(`An error occured: ${message} ${errors.value.join(", ")}`) // eslint-disable-line no-console
   }
