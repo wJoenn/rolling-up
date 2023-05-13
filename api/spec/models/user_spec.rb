@@ -42,4 +42,11 @@ RSpec.describe User, type: :model do
       expect(unique_jtis.length).to eq(2)
     end
   end
+
+  describe "associations" do
+    it "has many Character" do
+      character = user.characters.create(name: "Joenn")
+      expect(character.persisted?).to be_truthy
+    end
+  end
 end
