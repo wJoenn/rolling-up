@@ -36,6 +36,7 @@ module.exports = {
     "max-len": ["error", 120],
     "no-param-reassign": "off",
     "no-plusplus": "off",
+    "no-use-before-define": "off",
     "object-curly-newline": "off",
     "prefer-destructuring": "off",
     "quotes": ["error", "double"],
