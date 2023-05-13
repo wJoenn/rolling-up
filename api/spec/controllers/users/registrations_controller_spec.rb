@@ -1,7 +1,7 @@
 require "rails_helper"
 
 def create_user(params)
-  post "/signup",
+  post "/users",
     params: { user: params }.to_json,
     headers: { "Content-Type": "application/json" },
     env: { "devise.mapping": Devise.mappings[:user] }
@@ -52,7 +52,7 @@ RSpec.describe "Users::Registrations", type: :request do
       end
 
       it "responds with an accurate error message" do
-        expect(response.parsed_body["message"]).to include("Email is invalid")
+        expect(response.parsed_body["errors"]).to include("Email is invalid")
 
         allow_any_instance_of(User).to receive(:persisted?).and_return(false)
         create_user(correct_user_params)

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 def log_out
-  delete "/logout", env: { "devise.mapping": Devise.mappings[:user] }
+  delete "/users/sign_out", env: { "devise.mapping": Devise.mappings[:user] }
 end
 
 def responds_with_json?
@@ -39,13 +39,13 @@ RSpec.describe "Users::Sessions", type: :request do
     context "When user is not logged in successfuly" do
       before do
         post_sign_in("Wrong Email", user.password)
-        get "/login", headers: { "Content-Type": "application/json" } if response.status == 401
+        get "/users/sign_in", headers: { "Content-Type": "application/json" } if response.status == 302
       end
 
       it_behaves_like "a JSON object"
 
       it "responds with an error message" do
-        expect(response.parsed_body["message"]).to eq("Invalid Email or Password.")
+        expect(response.parsed_body["errors"]).to include("Invalid Email or Password.")
       end
 
       it "responds with a status code of 422" do

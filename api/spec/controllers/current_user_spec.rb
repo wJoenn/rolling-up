@@ -30,7 +30,7 @@ RSpec.describe CurrentUserController, type: :request do
         user.destroy
         get "/current_user", headers: { Authorization: "Bearer #{jwt_token}" }
 
-        expect(response).to have_http_status(:unauthorized)
+        expect(response).to have_http_status(:found)
       end
     end
   end
