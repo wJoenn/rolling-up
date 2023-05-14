@@ -19,7 +19,7 @@
         <span v-if="errors.passwordConfirmation">{{ errors.passwordConfirmation }}</span>
       </div>
 
-      <button>submit</button>
+      <button>Sign up</button>
     </form>
   </div>
 </template>

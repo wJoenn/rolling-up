@@ -13,7 +13,7 @@
         <input v-model="password" type="password" name="password">
       </div>
 
-      <button>submit</button>
+      <button>Log in</button>
     </form>
   </div>
 </template>

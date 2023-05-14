@@ -28,3 +28,8 @@ body {
 h1, h2, h3 {
   font-family: $header-font;
 }
+
+.container {
+  margin: 0 auto;
+  width: Min(1200px, 80%);
+}
