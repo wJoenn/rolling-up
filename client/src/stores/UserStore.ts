@@ -2,33 +2,19 @@ import { computed, ref } from "vue"
 import { defineStore } from "pinia"
 import axios from "axios"
 
-interface ApiResponseUser {
-  id: number
-  email: string
-  created_at: string | Date
-  updated_at: string | Date
-}
-
-interface RegistrationParams {
+interface Params {
   user: {
     email: string
     password: string
-    password_confirmation: string
-  }
-}
-
-interface SessionParams {
-  user: {
-    email: string
-    password: string
+    password_confirmation?: string
   }
 }
 
 interface User {
   id: number | null
   email: string | null
-  created_at: Date | null
-  updated_at: Date | null
+  created_at: string | null
+  updated_at: string | null
 }
 
 const useUserStore = defineStore("UserStore", () => {
@@ -49,7 +35,7 @@ const useUserStore = defineStore("UserStore", () => {
     return !loggedOut
   })
 
-  const login = (params: SessionParams): Promise<boolean> => postRequest("/users/sign_in", params)
+  const login = (params: Params): Promise<boolean> => postRequest("/users/sign_in", params)
 
   const loginUserWithToken = async (token: string) => {
     try {
@@ -72,7 +58,7 @@ const useUserStore = defineStore("UserStore", () => {
     }
   }
 
-  const signup = (params: RegistrationParams): Promise<boolean> => postRequest("/users", params)
+  const signup = (params: Params): Promise<boolean> => postRequest("/users", params)
 
   // Private
 
@@ -81,10 +67,11 @@ const useUserStore = defineStore("UserStore", () => {
     if (error.response.data.errors) errors.value = error.response.data.errors
     if (error.response.data.message) message = error.response.data.message
 
-    console.log(`An error occured: ${message} ${errors.value.join(", ")}`) // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log(`An error occured: ${message} ${errors.value.join(", ")}`)
   }
 
-  const postRequest = async (endPoint: string, params: SessionParams | RegistrationParams): Promise<boolean> => {
+  const postRequest = async (endPoint: string, params: Params): Promise<boolean> => {
     try {
       const res = await axios.post(
         `http://localhost:3000${endPoint}`,
@@ -120,10 +107,8 @@ const useUserStore = defineStore("UserStore", () => {
     localStorage.setItem("authToken", authToken.value)
   }
 
-  const updateUser = (userData: ApiResponseUser) => {
-    userData.created_at = new Date(userData.created_at)
-    userData.updated_at = new Date(userData.updated_at)
-    user.value = userData as User
+  const updateUser = (userData: User) => {
+    user.value = userData
   }
 
   return { authToken, errors, user, isLoggedIn, login, loginUserWithToken, logout, signup }
