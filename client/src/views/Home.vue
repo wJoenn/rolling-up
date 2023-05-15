@@ -34,24 +34,15 @@
 <style scoped lang="scss">
 @keyframes jump {
   0% {
-    // bottom: 0;
-    // translate: 0 0;
-    // margin-bottom: -50px;
-    transform: translate3d(0, 0, 0);
+    translate: 0 0;
   }
 
   50% {
-    // bottom: 10px;
-    // translate: 0 -3%;
-    // margin-bottom: -40px;
-    transform: translate3d(0, -3%, 0);
+    translate: 0 -3%;
   }
 
   100% {
-    // bottom: 0;
-    // translate: 0 0;
-    // margin-bottom: -50px;
-    transform: translate3d(0, 0, 0);
+    translate: 0 0;
   }
 }
 
