@@ -9,12 +9,12 @@
     </div>
 
     <div class="buttons">
-      <router-link :to="{ name: 'UserForm', params: { action: 'sign_in' } }" class="btn">
+      <router-link :to="{ name: 'UserForm', params: { action: 'sign_in' } }" class="btn btn-purple">
         <span>LOG IN</span>
         <fai icon="fa-solid fa-dragon" />
       </router-link>
 
-      <router-link :to="{ name: 'UserForm', params: { action: 'sign_up' } }" class="btn">
+      <router-link :to="{ name: 'UserForm', params: { action: 'sign_up' } }" class="btn btn-purple">
         <span>CREATE AN ACCOUNT</span>
         <fai icon="fa-solid fa-dragon" />
       </router-link>
@@ -47,17 +47,6 @@
     flex-direction: column;
     font-weight: 700;
     gap: 20px;
-
-    .btn {
-      background-image: linear-gradient(135deg, rgb(91, 115, 224), rgb(165, 73, 165));
-      border: 1px solid $lightgrey;
-      border-radius: 10px;
-      color: inherit;
-      display: flex;
-      font: inherit;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-    }
   }
 }
 </style>
