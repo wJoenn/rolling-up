@@ -16,12 +16,16 @@
 <script setup lang="ts">
   import { ref } from "vue"
   import useUserStore from "../stores/UserStore.ts"
-  import SessionsNew from "./SessionsNew.vue"
-  import RegistrationsNew from "./RegistrationsNew.vue"
+  import SessionsNew from "../components/SessionsNew.vue"
+  import RegistrationsNew from "../components/RegistrationsNew.vue"
+
+  const props = defineProps({
+    action: String
+  })
 
   const userStore = useUserStore()
 
-  const hasAccount = ref(true)
+  const hasAccount = ref(props.action === "sign_in")
 </script>
 
 <style scoped lang="scss">

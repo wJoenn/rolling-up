@@ -5,20 +5,24 @@
     <div>
       <img src="../assets/images/dice.gif" alt="dice">
       <h1>Rollingup</h1>
-      <p>Welcome to the best DnD character creation assistant. Create an account and </p>
+      <p>Welcome to the best DnD character creation assistant. Create an account and access your characters anytime.</p>
     </div>
 
     <div class="buttons">
-      <button>Login</button>
-      <button>Signup</button>
-    </div>
+      <router-link :to="{ name: 'UserForm', params: { action: 'sign_in' } }" class="btn">
+        <span>LOG IN</span>
+        <fai icon="fa-solid fa-dragon" />
+      </router-link>
 
-    <!-- <UserForm /> -->
+      <router-link :to="{ name: 'UserForm', params: { action: 'sign_up' } }" class="btn">
+        <span>CREATE AN ACCOUNT</span>
+        <fai icon="fa-solid fa-dragon" />
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  // import UserForm from "../components/UserForm.vue"
 </script>
 
 <style scoped lang="scss">
@@ -44,9 +48,15 @@
     font-weight: 700;
     gap: 20px;
 
-    button {
+    .btn {
+      background-image: linear-gradient(135deg, rgb(91, 115, 224), rgb(165, 73, 165));
+      border: 1px solid $lightgrey;
+      border-radius: 10px;
+      color: inherit;
+      display: flex;
       font: inherit;
-      padding: $padding;
+      justify-content: space-between;
+      padding: 1rem 2rem;
     }
   }
 }
