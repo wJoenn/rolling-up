@@ -1,21 +1,23 @@
 <template>
-  <div>
-    <button v-if="userStore.isLoggedIn" @click="userStore.logout">Logout</button>
-    <div v-else>
-      <div>
-        <button @click="hasAccount = true">Login</button>
-        <button @click="hasAccount = false">Signup</button>
-      </div>
+  <div id="user-forms" class="container">
+    <router-link :to="{ name: 'Home' }"><fai icon="fa-solid fa-chevron-left" /></router-link>
 
-      <SessionsNew v-if="hasAccount" />
-      <RegistrationsNew v-else />
+    <div v-if="hasAccount">
+      <SessionsNew />
+      <button class="link" @click="hasAccount = false">Don't have an account yet ?</button>
     </div>
+
+    <div v-else>
+      <RegistrationsNew />
+      <button class="link" @click="hasAccount = true">Already have an account ?</button>
+    </div>
+
+    <div />
   </div>
 </template>
 
 <script setup lang="ts">
   import { ref } from "vue"
-  import useUserStore from "../stores/UserStore.ts"
   import SessionsNew from "../components/SessionsNew.vue"
   import RegistrationsNew from "../components/RegistrationsNew.vue"
 
@@ -23,10 +25,28 @@
     action: String
   })
 
-  const userStore = useUserStore()
-
   const hasAccount = ref(props.action === "sign_in")
 </script>
 
 <style scoped lang="scss">
+  #user-forms {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 20px 0;
+
+    .link {
+      background-color: transparent;
+      box-shadow: none;
+      font-weight: 700;
+      margin: 0 auto;
+
+      // gradient text
+      background: linear-gradient(135deg, rgb(91, 115, 224), rgb(165, 73, 165));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
 </style>

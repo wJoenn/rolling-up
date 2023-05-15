@@ -3,7 +3,7 @@ import { createPinia } from "pinia"
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 import { library } from "@fortawesome/fontawesome-svg-core"
-import { faDragon } from "@fortawesome/free-solid-svg-icons"
+import { faChevronLeft, faDragon } from "@fortawesome/free-solid-svg-icons"
 
 import App from "./App.vue"
 import router from "./router/router.ts"
@@ -13,7 +13,7 @@ import "./assets/stylesheets/application.scss"
 const app = createApp(App)
 const pinia = createPinia()
 
-library.add(faDragon)
+library.add(faChevronLeft, faDragon)
 
 const loadAuthToken = async () => {
   const authToken = localStorage.getItem("authToken")

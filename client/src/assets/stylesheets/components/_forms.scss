@@ -22,11 +22,15 @@
       color: inherit;
       font: inherit;
       padding: $padding;
-      transition: box-shadow 0.3s ease;
+      transition: all 0.3s ease;
 
       &:focus {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px black;
         outline: none;
+      }
+
+      &:-webkit-autofill {
+        transition: background-color 600000s 0s, color 600000s 0s;
       }
     }
 
