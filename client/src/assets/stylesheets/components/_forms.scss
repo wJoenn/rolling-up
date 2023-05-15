@@ -52,6 +52,29 @@
       flex-direction: column;
       gap: 5px;
     }
+
+    .password {
+      background-color: $darkgrey;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 0 black;
+      display: flex;
+      justify-content: space-between;
+      padding: $padding;
+      transition: all 0.3s ease;
+
+      &:has(input:focus) {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px black;
+        outline: none;
+      }
+
+      input {
+        background-color: transparent;
+        box-shadow: none;
+        flex-grow: 1;
+        padding: 0;
+      }
+    }
   }
 
   h2 {

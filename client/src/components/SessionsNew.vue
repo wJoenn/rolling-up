@@ -12,7 +12,11 @@
 
       <div class="field">
         <label for="password">Password</label>
-        <input v-model="password" type="password" name="password">
+
+        <div class="password">
+          <input v-model="password" type="password" name="password" class="passwordInput">
+          <fai :icon="['fa-solid', show ? 'fa-eye-slash' : 'fa-eye']" @click="handleClick" />
+        </div>
       </div>
 
       <button class="btn-purple">Log in</button>
@@ -23,12 +27,18 @@
 <script setup lang="ts">
   import { ref } from "vue"
   import useUserStore from "../stores/UserStore.ts"
+  import togglePassword from "../composables/togglePassword.ts"
 
   const email = ref("")
   const password = ref("")
   const error = ref("")
+  const show = ref(false)
 
   const userStore = useUserStore()
+
+  const handleClick = () => {
+    togglePassword(show)
+  }
 
   const handleSubmit = async () => {
     const params = {
@@ -37,6 +47,7 @@
         password: password.value
       }
     }
+
     if (!await userStore.login(params)) error.value = userStore.errors[0]
   }
 </script>

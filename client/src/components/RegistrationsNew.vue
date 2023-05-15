@@ -11,13 +11,19 @@
 
       <div class="field">
         <label for="password">Password</label>
-        <input v-model="password" type="password" name="password">
+        <div class="password">
+          <input v-model="password" type="password" name="password" class="passwordInput">
+          <fai :icon="['fa-solid', show ? 'fa-eye-slash' : 'fa-eye']" @click="handleClick" />
+        </div>
         <span v-if="errors.password" class="error">{{ errors.password }}</span>
       </div>
 
       <div class="field">
         <label for="password-confirmation">Password confirmation</label>
-        <input v-model="passwordConfirmation" type="password" name="password-confirmation">
+        <div class="password">
+          <input v-model="passwordConfirmation" type="password" name="password-confirmation" class="passwordInput">
+          <fai :icon="['fa-solid', show ? 'fa-eye-slash' : 'fa-eye']" @click="handleClick" />
+        </div>
         <span v-if="errors.passwordConfirmation" class="error">{{ errors.passwordConfirmation }}</span>
       </div>
 
@@ -29,6 +35,7 @@
 <script setup lang="ts">
   import { ref } from "vue"
   import useUserStore from "../stores/UserStore.ts"
+  import togglePassword from "../composables/togglePassword.ts"
 
   interface Errors {
     email?: string
@@ -39,9 +46,14 @@
   const email = ref("")
   const password = ref("")
   const passwordConfirmation = ref("")
+  const show = ref(false)
   const errors = ref<Errors>({})
 
   const userStore = useUserStore()
+
+  const handleClick = () => {
+    togglePassword(show)
+  }
 
   const handleSubmit = async () => {
     const params = {

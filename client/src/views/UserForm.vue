@@ -4,12 +4,18 @@
 
     <div v-if="hasAccount">
       <SessionsNew />
-      <button class="link" @click="hasAccount = false">Don't have an account yet ?</button>
+      <!-- eslint-disable-next-line max-len -->
+      <router-link :to="{ name: 'UserForm', params: { action: 'sign_up' } }" class="btn link" @click="hasAccount = false">
+        Don't have an account yet ?
+      </router-link>
     </div>
 
     <div v-else>
       <RegistrationsNew />
-      <button class="link" @click="hasAccount = true">Already have an account ?</button>
+      <!-- eslint-disable-next-line max-len -->
+      <router-link :to="{ name: 'UserForm', params: { action: 'sign_in' } }" class="btn link" @click="hasAccount = true">
+        Already have an account ?
+      </router-link>
     </div>
 
     <div />
