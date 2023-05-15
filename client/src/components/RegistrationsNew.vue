@@ -1,25 +1,27 @@
 <template>
-  <div>
+  <div class="form">
+    <h2>Sign up</h2>
+
     <form @submit.prevent="handleSubmit">
-      <div>
+      <div class="field">
         <label for="email">Email</label>
         <input v-model="email" type="text" name="email">
-        <span v-if="errors.email">{{ errors.email }}</span>
+        <span v-if="errors.email" class="error">{{ errors.email }}</span>
       </div>
 
-      <div>
+      <div class="field">
         <label for="password">Password</label>
         <input v-model="password" type="password" name="password">
-        <span v-if="errors.password">{{ errors.password }}</span>
+        <span v-if="errors.password" class="error">{{ errors.password }}</span>
       </div>
 
-      <div>
+      <div class="field">
         <label for="password-confirmation">Password confirmation</label>
         <input v-model="passwordConfirmation" type="password" name="password-confirmation">
-        <span v-if="errors.passwordConfirmation">{{ errors.passwordConfirmation }}</span>
+        <span v-if="errors.passwordConfirmation" class="error">{{ errors.passwordConfirmation }}</span>
       </div>
 
-      <button>Sign up</button>
+      <button class="btn-purple">Sign up</button>
     </form>
   </div>
 </template>

@@ -1,19 +1,21 @@
 <template>
-  <div>
-    <form @submit.prevent="handleSubmit">
-      <span v-if="error">{{ error }}</span>
+  <div class="form">
+    <h2>Log in</h2>
 
-      <div>
+    <form @submit.prevent="handleSubmit">
+      <span v-if="error" class="error">{{ error }}</span>
+
+      <div class="field">
         <label for="email">Email</label>
         <input v-model="email" type="text" name="email">
       </div>
 
-      <div>
+      <div class="field">
         <label for="password">Password</label>
         <input v-model="password" type="password" name="password">
       </div>
 
-      <button>Log in</button>
+      <button class="btn-purple">Log in</button>
     </form>
   </div>
 </template>
