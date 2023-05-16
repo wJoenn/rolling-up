@@ -5,5 +5,10 @@ Rails.application.routes.draw do
       registrations: "users/registrations"
     }
 
-  get "/current_user", to: "current_user#show"
+  get "current_user", to: "current_user#show"
+  resources :characters, only: %i[] do
+    collection do
+      get :total
+    end
+  end
 end
