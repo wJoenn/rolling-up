@@ -1,7 +1,5 @@
 <template>
   <div id="home" class="container">
-    <div />
-
     <div>
       <div class="gif"><div /></div>
 
@@ -25,10 +23,22 @@
         <fai icon="fa-solid fa-dragon" />
       </router-link>
     </div>
+
+    <div v-if="total > 0" class="counter">
+      <ul>
+        <li v-for="digit in digits" :key="digit">{{ digit }}</li>
+      </ul>
+      <p>characters brought to life so far</p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { toRefs } from "vue"
+  import useAppStore from "../stores/AppStore.ts"
+
+  const appStore = useAppStore()
+  const { total, digits } = toRefs(appStore)
 </script>
 
 <style scoped lang="scss">
@@ -80,6 +90,34 @@
     flex-direction: column;
     font-weight: 700;
     gap: 20px;
+  }
+
+  .counter {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    p {
+      font-size: 0.8rem;
+    }
+
+    ul {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+
+      li {
+        align-items: center;
+        background-color: $darkgrey;
+        border-radius: 5px;
+        display: flex;
+        font-size: 30px;
+        font-weight: 700;
+        height: 45px;
+        justify-content: center;
+        width: 35px;
+      }
+    }
   }
 
   .gif {
