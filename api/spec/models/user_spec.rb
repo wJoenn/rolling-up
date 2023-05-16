@@ -39,7 +39,7 @@ RSpec.describe User, type: :model do
       jti = user.jti
       User.create(email: "another@example.com", password:, jti:)
       unique_jtis = User.all.map(&:jti).uniq
-      expect(unique_jtis.length).to eq(2)
+      expect(unique_jtis.length).to eq 2
     end
   end
 

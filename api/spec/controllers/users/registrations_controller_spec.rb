@@ -12,13 +12,6 @@ RSpec.describe "Users::Registrations", type: :request do
     let!(:correct_user_params) { { email: "user@example.com", password: "password", username: "Joenn" } }
     let!(:wrong_user_params) { { email: "user@example", password: "password", username: "Joenn" } }
 
-    shared_examples "a JSON object" do
-      it "responds with a JSON object" do
-        expect(response.body.class).to be(String)
-        expect(response.parsed_body.class).to be(Hash)
-      end
-    end
-
     context "When user is registered successfuly" do
       before do
         create_user(correct_user_params)
@@ -32,7 +25,7 @@ RSpec.describe "Users::Registrations", type: :request do
 
       it "responds with the newly created user and a success message" do
         expect(response.parsed_body.key?("user")).to be_truthy
-        expect(response.parsed_body["message"]).to eq("Signed up successfully.")
+        expect(response.parsed_body["message"]).to eq "Signed up successfully."
       end
 
       it "responds with a status code of 200" do
@@ -52,16 +45,16 @@ RSpec.describe "Users::Registrations", type: :request do
       end
 
       it "responds with an accurate error message" do
-        expect(response.parsed_body["errors"]).to include("Email is invalid")
+        expect(response.parsed_body["errors"]).to include "Email is invalid"
 
         allow_any_instance_of(User).to receive(:persisted?).and_return(false)
         create_user(correct_user_params)
 
-        expect(response.parsed_body["message"]).to match("User couldn't be created successfully.")
+        expect(response.parsed_body["message"]).to match "User couldn't be created successfully."
       end
 
       it "responds with a status code of 422" do
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status :unprocessable_entity
       end
     end
   end

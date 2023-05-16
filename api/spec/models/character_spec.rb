@@ -43,13 +43,13 @@ RSpec.describe Character, type: :model do
     end
 
     it "has a default value of 10 for its stats" do
-      expect(character.base_ac).to eq(10)
-      expect(character.strength).to eq(10)
-      expect(character.dexterity).to eq(10)
-      expect(character.constitution).to eq(10)
-      expect(character.intelligence).to eq(10)
-      expect(character.wisdom).to eq(10)
-      expect(character.charisma).to eq(10)
+      expect(character.base_ac).to eq 10
+      expect(character.strength).to eq 10
+      expect(character.dexterity).to eq 10
+      expect(character.constitution).to eq 10
+      expect(character.intelligence).to eq 10
+      expect(character.wisdom).to eq 10
+      expect(character.charisma).to eq 10
     end
   end
 
@@ -62,43 +62,43 @@ RSpec.describe Character, type: :model do
   describe "#ac" do
     it "return the base AC + the constition modifier" do
       character.update(constitution: 14)
-      expect(character.ac).to eq(12)
+      expect(character.ac).to eq 12
     end
   end
 
   describe "#strength_modifier" do
     it "returns 0 with a parameter of 10" do
-      expect(character.strength_modifier).to eq(0)
+      expect(character.strength_modifier).to be_zero
     end
   end
 
   describe "#dexterity_modifier" do
     it "returns 0 with a parameter of 10" do
-      expect(character.dexterity_modifier).to eq(0)
+      expect(character.dexterity_modifier).to be_zero
     end
   end
 
   describe "#constitution_modifier" do
     it "returns 0 with a parameter of 10" do
-      expect(character.constitution_modifier).to eq(0)
+      expect(character.constitution_modifier).to be_zero
     end
   end
 
   describe "#intelligence_modifier" do
     it "returns 0 with a parameter of 10" do
-      expect(character.intelligence_modifier).to eq(0)
+      expect(character.intelligence_modifier).to be_zero
     end
   end
 
   describe "#wisdom_modifier" do
     it "returns 0 with a parameter of 10" do
-      expect(character.wisdom_modifier).to eq(0)
+      expect(character.wisdom_modifier).to be_zero
     end
   end
 
   describe "#charisma_modifier" do
     it "returns 0 with a parameter of 10" do
-      expect(character.charisma_modifier).to eq(0)
+      expect(character.charisma_modifier).to be_zero
     end
   end
 end

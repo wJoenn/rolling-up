@@ -4,19 +4,8 @@ def log_out
   delete "/users/sign_out", env: { "devise.mapping": Devise.mappings[:user] }
 end
 
-def responds_with_json?
-  expect(response.body.class).to be(String)
-  expect(response.parsed_body.class).to be(Hash)
-end
-
 RSpec.describe "Users::Sessions", type: :request do
   let!(:user) { User.create(email: "user@example.com", password: "password") }
-
-  shared_examples "a JSON object" do
-    it "responds with a JSON object" do
-      responds_with_json?
-    end
-  end
 
   describe "POST /create" do
     context "When user is logged in sucessfuly" do
@@ -28,7 +17,7 @@ RSpec.describe "Users::Sessions", type: :request do
 
       it "responds with the logged in user and a success message" do
         expect(response.parsed_body.key?("user")).to be_truthy
-        expect(response.parsed_body["message"]).to eq("Logged in sucessfully.")
+        expect(response.parsed_body["message"]).to eq "Logged in sucessfully."
       end
 
       it "responds with a status code of 200" do
@@ -45,11 +34,11 @@ RSpec.describe "Users::Sessions", type: :request do
       it_behaves_like "a JSON object"
 
       it "responds with an error message" do
-        expect(response.parsed_body["errors"]).to include("Invalid Email or Password.")
+        expect(response.parsed_body["errors"]).to include "Invalid Email or Password."
       end
 
       it "responds with a status code of 422" do
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status :unprocessable_entity
       end
     end
   end
@@ -64,7 +53,7 @@ RSpec.describe "Users::Sessions", type: :request do
       it_behaves_like "a JSON object"
 
       it "responds with a success message" do
-        expect(response.parsed_body["message"]).to eq("logged out successfully")
+        expect(response.parsed_body["message"]).to eq "logged out successfully"
       end
 
       it "responds with a status code of 200" do
@@ -80,11 +69,11 @@ RSpec.describe "Users::Sessions", type: :request do
       it_behaves_like "a JSON object"
 
       it "responds with a success message" do
-        expect(response.parsed_body["message"]).to eq("Hmm nothing happened.")
+        expect(response.parsed_body["message"]).to eq "Hmm nothing happened."
       end
 
       it "responds with a status code of 404" do
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status :not_found
       end
     end
   end

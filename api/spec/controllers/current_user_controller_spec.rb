@@ -17,11 +17,15 @@ RSpec.describe CurrentUserController, type: :request do
     end
 
     context "When the token is valid" do
-      it "returns a success response" do
+      before do
         get "/current_user", headers: { Authorization: "Bearer #{jwt_token}" }
+      end
 
+      it_behaves_like "a JSON object"
+
+      it "returns a success response" do
         expect(response).to be_successful
-        expect(response.parsed_body["message"]).to eq("Logged in sucessfully.")
+        expect(response.parsed_body["message"]).to eq "Logged in sucessfully."
       end
     end
 
@@ -30,7 +34,7 @@ RSpec.describe CurrentUserController, type: :request do
         user.destroy
         get "/current_user", headers: { Authorization: "Bearer #{jwt_token}" }
 
-        expect(response).to have_http_status(:found)
+        expect(response).to have_http_status :found
       end
     end
   end
