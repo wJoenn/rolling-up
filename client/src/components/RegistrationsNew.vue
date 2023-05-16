@@ -12,7 +12,7 @@
       <div class="field">
         <label for="password">Password</label>
         <div class="password">
-          <input v-model="password" type="password" name="password" class="passwordInput">
+          <input v-model="password" type="password" name="password">
           <fai :icon="['fa-solid', show ? 'fa-eye-slash' : 'fa-eye']" @click="handleClick" />
         </div>
         <span v-if="errors.password" class="error">{{ errors.password }}</span>
@@ -21,7 +21,7 @@
       <div class="field">
         <label for="password-confirmation">Password confirmation</label>
         <div class="password">
-          <input v-model="passwordConfirmation" type="password" name="password-confirmation" class="passwordInput">
+          <input v-model="passwordConfirmation" type="password" name="password-confirmation">
           <fai :icon="['fa-solid', show ? 'fa-eye-slash' : 'fa-eye']" @click="handleClick" />
         </div>
         <span v-if="errors.passwordConfirmation" class="error">{{ errors.passwordConfirmation }}</span>

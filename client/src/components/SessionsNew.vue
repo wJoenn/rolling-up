@@ -14,7 +14,7 @@
         <label for="password">Password</label>
 
         <div class="password">
-          <input v-model="password" type="password" name="password" class="passwordInput">
+          <input v-model="password" type="password" name="password">
           <fai :icon="['fa-solid', show ? 'fa-eye-slash' : 'fa-eye']" @click="handleClick" />
         </div>
       </div>

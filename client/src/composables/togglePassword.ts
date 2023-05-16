@@ -3,7 +3,7 @@ import { Ref } from "vue"
 const togglePassword = (show: Ref<boolean>) => {
   show.value = !show.value
 
-  const inputs = document.querySelectorAll(".passwordInput") as NodeListOf<HTMLInputElement>
+  const inputs = document.querySelectorAll(".password input") as NodeListOf<HTMLInputElement>
   inputs.forEach(i => { i.type = show.value ? "text" : "password" })
 }
 
