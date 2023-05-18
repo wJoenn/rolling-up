@@ -28,11 +28,7 @@
 <script setup lang="ts">
   import { onMounted, ref } from "vue"
   import useCharacterStore from "../../stores/CharacterStore.ts"
-
-  interface Character {
-    id: number | null
-    name: string | null
-  }
+  import Character from "../../types/Character.ts"
 
   const characters = ref<Character[]>([])
 

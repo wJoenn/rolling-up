@@ -1,6 +1,8 @@
 import { defineStore } from "pinia"
 import axios from "axios"
 
+import Character from "../types/Character.ts"
+
 const authToken = localStorage.getItem("authToken")
 
 const useCharacterStore = defineStore("CharacterStore", () => {
@@ -8,7 +10,7 @@ const useCharacterStore = defineStore("CharacterStore", () => {
     try {
       const res = await axios.get("http://localhost:3000/characters", { headers: { Authorization: authToken } })
 
-      const characters = JSON.parse(res.data.characters)
+      const characters: Character[] = res.data.characters
       return characters
     } catch {
       return []
