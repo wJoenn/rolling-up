@@ -8,10 +8,16 @@
 
     <div class="container">
       <div class="characters">
+        <div v-for="character in characters" :key="(character.id as number)" class="character">
+          <div class="character-shadow" />
+          <span>{{ character.name }}</span>
+        </div>
+
         <router-link :to="{ name: 'CharactersNew' }" class="character">
           <div class="character-shadow">
             <fai icon="fa-solid fa-plus" />
           </div>
+
           <span>Create a Character</span>
         </router-link>
       </div>
@@ -20,30 +26,50 @@
 </template>
 
 <script setup lang="ts">
+  import { onMounted, ref } from "vue"
+  import useCharacterStore from "../../stores/CharacterStore.ts"
+
+  interface Character {
+    id: number | null
+    name: string | null
+  }
+
+  const characters = ref<Character[]>([])
+
+  const characterStore = useCharacterStore()
+
+  onMounted(async () => {
+    characters.value = await characterStore.getCharacters()
+  })
 </script>
 
 <style scoped lang="scss">
-  #characters-index .character {
-    align-items: center;
-    background-color: $darkgrey;
-    border-radius: 10px;
-    display: flex;
-    padding: 1rem;
+  #characters-index .characters {
+    padding: 20px 0;
 
-    span {
-      display: inline-block;
-      flex-grow: 1;
-      text-align: center;
-    }
-
-    .character-shadow {
+    .character {
       align-items: center;
-      background-image: url("../../assets/images/character_shadow.png");
-      background-size: cover;
+      background-color: $darkgrey;
+      border-radius: 10px;
       display: flex;
-      justify-content: center;
-      height: 75px;
-      width: 75px;
+      margin-bottom: 10px;
+      padding: 1rem;
+
+      span {
+        display: inline-block;
+        flex-grow: 1;
+        text-align: center;
+      }
+
+      .character-shadow {
+        align-items: center;
+        background-image: url("../../assets/images/character_shadow.png");
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        height: 75px;
+        width: 75px;
+      }
     }
   }
 </style>

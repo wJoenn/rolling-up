@@ -31,7 +31,7 @@ const routes = [
     meta: { requiresAuth: false }
   },
   {
-    path: "/characters/index",
+    path: "/characters",
     name: "CharactersIndex",
     component: CharactersIndex,
     meta: { requiresAuth: true }

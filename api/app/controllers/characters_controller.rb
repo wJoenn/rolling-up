@@ -4,7 +4,7 @@ class CharactersController < ApplicationController
 
   def index
     characters = current_user.characters
-    render json: { characters: }, status: :ok
+    render json: { characters: characters.to_json(only: %i[id name]) }, status: :ok
   end
 
   def create
