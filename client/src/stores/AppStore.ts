@@ -11,7 +11,7 @@ const useAppStore = defineStore("AppStore", () => {
     try {
       const res = await axios.get("http://localhost:3000/characters/total")
       total.value = res.data.total
-    } catch (err: any) {
+    } catch (err) {
       // Error's handled in component
     }
   }
