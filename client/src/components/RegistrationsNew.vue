@@ -34,6 +34,7 @@
 
 <script setup lang="ts">
   import { ref } from "vue"
+  import { useRouter } from "vue-router"
   import useUserStore from "../stores/UserStore.ts"
   import togglePassword from "../composables/togglePassword.ts"
 
@@ -49,6 +50,7 @@
   const show = ref(false)
   const errors = ref<Errors>({})
 
+  const router = useRouter()
   const userStore = useUserStore()
 
   const handleClick = () => {
@@ -65,6 +67,7 @@
     }
 
     if (!await userStore.signup(params)) sortErrors(userStore.errors)
+    else router.push({ name: "CharactersIndex" })
   }
 
   const sortErrors = (err: string[]) => {
