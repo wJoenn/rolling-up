@@ -43,6 +43,34 @@ RSpec.describe CharactersController, type: :request do
     end
   end
 
+  describe "GET /index" do
+    before do
+      sign_in user
+      Character.create(name: "Joenn", user:)
+      get "/characters"
+    end
+
+    it "requires to be logged in" do
+      sign_out user
+      get "/characters"
+
+      expect(response).to have_http_status :found
+    end
+
+    it_behaves_like "a JSON object"
+
+    it "returns http success" do
+      expect(response).to have_http_status :success
+    end
+
+    it "returns a list of Character" do
+      list = response.parsed_body["characters"]
+
+      expect(list.length).to eq(1)
+      expect(list.pluck("name")).to all eq "Joenn"
+    end
+  end
+
   describe "GET /total" do
     before do
       get "/characters/total"

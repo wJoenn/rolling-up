@@ -1,7 +1,11 @@
 class CharactersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[total]
-
   before_action :character_params, only: %i[create]
+
+  def index
+    characters = current_user.characters
+    render json: { characters: }, status: :ok
+  end
 
   def create
     character = current_user.characters.new(character_params)
