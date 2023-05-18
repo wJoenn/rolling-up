@@ -3,9 +3,10 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: space-around;
+  margin-bottom: 20px;
   padding: 1rem;
 
-  button {
+  a, button {
     background-color: transparent;
     box-shadow: none;
     font-size: 1.5rem;

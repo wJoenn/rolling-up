@@ -4,6 +4,7 @@ import useUserStore from "../stores/UserStore.ts"
 import Home from "../views/Home.vue"
 import UserForm from "../views/UserForm.vue"
 import CharactersIndex from "../views/characters/Index.vue"
+import CharactersNew from "../views/characters/New.vue"
 
 const verifyAuthentification = (to: RouteLocationNormalized, next: NavigationGuardNext) => {
   const isLoggedIn = useUserStore().isLoggedIn
@@ -33,6 +34,12 @@ const routes = [
     path: "/characters/index",
     name: "CharactersIndex",
     component: CharactersIndex,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/characters/new",
+    name: "CharactersNew",
+    component: CharactersNew,
     meta: { requiresAuth: true }
   }
 ]
