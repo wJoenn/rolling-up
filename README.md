@@ -15,6 +15,15 @@ The app is build with Vue.js around a Ruby on Rails + PostgreSQL api
 ```
 git clone git@github.com:wJoenn/rolling-up.git
 cd rolling-up
+```
+Delete the credentials.yml.enc file
+```
+yarn rails secret # Copy the secret key somewhere
+yarn rails credentials:edit
+EDITOR=nano yarn rails credentials:edit
+```
+Add a new key called devise_jwt_secret_key and copy the secret key you generated then save and exit
+```
 yarn setup
 dev
 ```
