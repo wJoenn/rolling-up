@@ -21,7 +21,9 @@
     "db:migrate": "cd api && rails db:migrate",
     "db:seed": "cd api && rails db:seed",
     "rspec": "cd api && rspec",
-    "rubocop": "cd api && rubocop"
+    "rubocop": "cd api && rubocop",
+
+    "setup": "install vite:install bundle db:create db:migrate db:seed"
   },
   "dependencies": {
     "concurrently": "^8.0.1"
