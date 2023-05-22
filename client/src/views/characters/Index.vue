@@ -3,7 +3,9 @@
     <div class="navbar">
       <button><fai icon="fa-solid fa-bars" /></button>
       <h2>Your Characters</h2>
-      <router-link :to="{ name: 'CharactersNew' }"><fai icon="fa-solid fa-plus" /></router-link>
+      <router-link :to="{ name: 'CharactersNew' }" class="last">
+        <fai icon="fa-solid fa-plus" />
+      </router-link>
     </div>
 
     <div class="container">
