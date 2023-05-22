@@ -5,7 +5,7 @@
     <div v-if="hasAccount">
       <SessionsNew />
       <!-- eslint-disable-next-line max-len -->
-      <router-link :to="{ name: 'UserForm', params: { action: 'sign_up' } }" class="btn link" @click="hasAccount = false">
+      <router-link :to="{ name: 'UserForm', params: { action: 'sign_up' } }" class="btn link gradient-text" @click="hasAccount = false">
         Don't have an account yet ?
       </router-link>
     </div>
@@ -13,7 +13,7 @@
     <div v-else>
       <RegistrationsNew />
       <!-- eslint-disable-next-line max-len -->
-      <router-link :to="{ name: 'UserForm', params: { action: 'sign_in' } }" class="btn link" @click="hasAccount = true">
+      <router-link :to="{ name: 'UserForm', params: { action: 'sign_in' } }" class="btn link gradient-text" @click="hasAccount = true">
         Already have an account ?
       </router-link>
     </div>
@@ -47,12 +47,6 @@
       box-shadow: none;
       font-weight: 700;
       margin: 0 auto;
-
-      // gradient text
-      background: linear-gradient(135deg, rgb(91, 115, 224), rgb(165, 73, 165));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
   }
 </style>

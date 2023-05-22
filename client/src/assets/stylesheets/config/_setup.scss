@@ -38,6 +38,14 @@ nav, ul {
 }
 
 .container {
+  height: 100%;
   margin: 0 auto;
   width: Min(1200px, 80%);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, rgb(91, 115, 224), rgb(165, 73, 165));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

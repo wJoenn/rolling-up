@@ -1,81 +1,81 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+
+  button, .btn {
+    display: inline-block;
+    padding: $padding;
+  }
+
+  input {
+    background-color: $darkgrey;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 0 black;
+    color: inherit;
+    font: inherit;
+    padding: $padding;
+    transition: all 0.3s ease;
+
+    &:focus {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px black;
+      outline: none;
+    }
+
+    &:-webkit-autofill {
+      transition: background-color 600000s 0s, color 600000s 0s;
+    }
+  }
+
+  label {
+    color: $lightgrey-semi;
+  }
+
+
+  .error {
+    color: rgb(189, 95, 95);
+
+    &:is(span) {
+      font-size: 0.8rem;
+    }
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .password {
+    background-color: $darkgrey;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 0 black;
+    display: flex;
+    justify-content: space-between;
+    padding: $padding;
+    transition: all 0.3s ease;
+
+    &:has(input:focus) {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px black;
+      outline: none;
+    }
+
+    input {
+      background-color: transparent;
+      box-shadow: none;
+      flex-grow: 1;
+      padding: 0;
+    }
+  }
+}
+
 .form {
   display: flex;
   flex-direction: column;
   gap: 50px;
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-bottom: 20px;
-
-    button, .btn {
-      display: inline-block;
-      padding: $padding;
-    }
-
-    input {
-      background-color: $darkgrey;
-      border: none;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 0 black;
-      color: inherit;
-      font: inherit;
-      padding: $padding;
-      transition: all 0.3s ease;
-
-      &:focus {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px black;
-        outline: none;
-      }
-
-      &:-webkit-autofill {
-        transition: background-color 600000s 0s, color 600000s 0s;
-      }
-    }
-
-    label {
-      color: $lightgrey-semi;
-    }
-
-
-    .error {
-      color: rgb(189, 95, 95);
-
-      &:is(span) {
-        font-size: 0.8rem;
-      }
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .password {
-      background-color: $darkgrey;
-      border: none;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 0 black;
-      display: flex;
-      justify-content: space-between;
-      padding: $padding;
-      transition: all 0.3s ease;
-
-      &:has(input:focus) {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), inset 0 0 5px black;
-        outline: none;
-      }
-
-      input {
-        background-color: transparent;
-        box-shadow: none;
-        flex-grow: 1;
-        padding: 0;
-      }
-    }
-  }
 
   h2 {
     font-size: 50px;
