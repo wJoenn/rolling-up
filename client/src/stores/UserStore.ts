@@ -22,7 +22,7 @@ interface User {
 const useUserStore = defineStore("UserStore", () => {
   const authToken = ref<string | null>(null)
 
-  const errors = ref<string[]>([])
+  const errors = ref([""])
 
   const user = ref<User>({
     id: null,

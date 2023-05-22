@@ -1,4 +1,4 @@
-const handleApiErrors = (error: any) => {
+const handleApiErrors = (error: any): string[] => {
   let message: string = error.message
   let errors = [""]
   if (error.response.data.errors) errors = error.response.data.errors

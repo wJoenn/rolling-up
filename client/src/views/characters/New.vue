@@ -37,6 +37,7 @@
   const handleSubmit = async (event: Event) => {
     const formData = new FormData(event.target as HTMLFormElement)
     const isCreated = await characterStore.createCharacter(formData)
+
     if (!isCreated) sortErrors()
     else router.push({ name: "CharactersIndex" })
   }

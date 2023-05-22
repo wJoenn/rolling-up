@@ -21,7 +21,7 @@
       <div class="field">
         <label for="password-confirmation">Password confirmation</label>
         <div class="password">
-          <input v-model="passwordConfirmation" type="password" name="password-confirmation">
+          <input v-model="passwordConfirmation" type="password" name="password_confirmation">
           <fai :icon="['fa-solid', show ? 'fa-eye-slash' : 'fa-eye']" @click="handleClick" />
         </div>
         <span v-if="errors.passwordConfirmation" class="error">{{ errors.passwordConfirmation }}</span>
@@ -66,7 +66,9 @@
       }
     }
 
-    if (!await userStore.signup(params)) sortErrors()
+    const isSignedUp = await userStore.signup(params)
+
+    if (!isSignedUp) sortErrors()
     else router.push({ name: "CharactersIndex" })
   }
 

@@ -50,7 +50,8 @@
       }
     }
 
-    if (!await userStore.login(params)) error.value = userStore.errors[0]
+    const isLoggedIn = await userStore.login(params)
+    if (!isLoggedIn) error.value = userStore.errors[0]
     else router.push({ name: "CharactersIndex" })
   }
 </script>
