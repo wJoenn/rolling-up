@@ -2,6 +2,8 @@ import { computed, ref } from "vue"
 import { defineStore } from "pinia"
 import axios from "axios"
 
+import handleApiErrors from "../composables/handleApiErrors.ts"
+
 interface Params {
   user: {
     email: string
@@ -44,7 +46,7 @@ const useUserStore = defineStore("UserStore", () => {
       updateAuthToken(localStorage.getItem("authToken") as string)
       updateUser(res.data.user)
     } catch (err: any) {
-      handleError(err)
+      errors.value = handleApiErrors(err)
     }
   }
 
@@ -54,22 +56,13 @@ const useUserStore = defineStore("UserStore", () => {
 
       reset()
     } catch (err: any) {
-      handleError(err)
+      errors.value = handleApiErrors(err)
     }
   }
 
   const signup = (params: Params): Promise<boolean> => postRequest("/users", params)
 
   // Private
-
-  const handleError = (error: any) => {
-    let message: string = error.message
-    if (error.response.data.errors) errors.value = error.response.data.errors
-    if (error.response.data.message) message = error.response.data.message
-
-    // eslint-disable-next-line no-console
-    console.log(`An error occured: ${message} ${errors.value.join(", ")}`)
-  }
 
   const postRequest = async (endPoint: string, params: Params): Promise<boolean> => {
     try {
@@ -84,7 +77,7 @@ const useUserStore = defineStore("UserStore", () => {
 
       return true
     } catch (err: any) {
-      handleError(err)
+      errors.value = handleApiErrors(err)
 
       return false
     }

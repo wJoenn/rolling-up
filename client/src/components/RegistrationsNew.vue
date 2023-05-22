@@ -66,13 +66,13 @@
       }
     }
 
-    if (!await userStore.signup(params)) sortErrors(userStore.errors)
+    if (!await userStore.signup(params)) sortErrors()
     else router.push({ name: "CharactersIndex" })
   }
 
-  const sortErrors = (err: string[]) => {
+  const sortErrors = () => {
     errors.value = {}
-    err.forEach(e => {
+    userStore.errors.forEach(e => {
       if (/email/i.test(e)) errors.value.email = e
       else if (/confirmation/i.test(e)) errors.value.passwordConfirmation = e
       else if (/password/i.test(e)) errors.value.password = e
