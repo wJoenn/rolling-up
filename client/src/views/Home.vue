@@ -34,11 +34,25 @@
 </template>
 
 <script setup lang="ts">
-  import { toRefs } from "vue"
-  import useAppStore from "../stores/AppStore.ts"
+  import { computed, onMounted, ref } from "vue"
+  import axios from "axios"
 
-  const appStore = useAppStore()
-  const { total, digits } = toRefs(appStore)
+  const total = ref(0)
+
+  const digits = computed(() => Array.from(String(total.value)))
+
+  const getTotalCharactersCreated = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/characters/total")
+      total.value = res.data.total as number
+    } catch {
+      // Error's handled in component
+    }
+  }
+
+  onMounted(() => {
+    getTotalCharactersCreated()
+  })
 </script>
 
 <style scoped lang="scss">
