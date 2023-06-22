@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <button class="btn-purple">Log in</button>
+      <button class="btn-purple">LOG IN</button>
     </form>
   </div>
 </template>

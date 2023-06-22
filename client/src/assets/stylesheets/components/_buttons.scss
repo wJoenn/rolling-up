@@ -1,16 +1,24 @@
-button, .btn {
-  background-color: $darkgrey;
+@mixin btn {
   border: none;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   color: inherit;
   display: flex;
   font: inherit;
+  font-weight: 500;
   justify-content: space-between;
   padding: 1rem 2rem;
+}
 
-  &.btn-purple {
-    background-image: linear-gradient(135deg, rgb(91, 115, 224), rgb(165, 73, 165));
-    border: 2px solid $lightgrey;
-  }
+button, .btn {
+  @include btn;
+
+  background-color: $darkgrey;
+}
+
+.btn-purple {
+  @include btn;
+
+  background-image: linear-gradient(135deg, rgb(91, 115, 224), rgb(165, 73, 165));
+  border: 2px solid $lightgrey;
 }
