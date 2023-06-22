@@ -3,7 +3,7 @@
 # Run RSpec, yarn lint, and rubocop before pushing
 echo "Running esLint..."
 echo "###############################"
-yarn lint
+vite lint
 if [ $? -ne 0 ]; then
   echo -e "\e[31m\nFAILURE: Your esLint tests have failed\e[0m"
   exit 1
@@ -13,7 +13,7 @@ fi
 
 echo -e "\nRunning Typescript..."
 echo "###############################"
-yarn type-check
+vite type-check
 if [ $? -ne 0 ]; then
   echo -e "\e[31m\nFAILURE: Your Typescript tests have failed\e[0m"
   exit 1
@@ -23,7 +23,7 @@ fi
 
 echo -e "\nRunning Rubocop..."
 echo "###############################"
-yarn rubocop
+rubocop
 if [ $? -ne 0 ]; then
   echo -e "\e[31m\nFAILURE: Your Rubocop tests have failed\e[0m"
   exit 1

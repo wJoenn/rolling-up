@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# Run RSpec, yarn lint, and rubocop before pushing
+if ! npm list concurrently >/dev/null 2>&1; then
+  echo "Installing Concurrently..."
+  yarn install concurrently
+fi
+
 echo "Running servers..."
 echo "###############################"
-yarn dev
+concurrently --kill-others -n Rails:,Vite:, -c red,green, "rails s" "vite dev"

@@ -23,6 +23,7 @@ body {
   font-family: $body-font;
   height: 1px;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 h1, h2, h3 {

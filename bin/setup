@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "Installing client's packages"
+vite install
+
+echo "Installing api's gems"
+bundle
+
+echo "Preparing database"
+rails db:drop
+rails db:create
+rails db:migrate
+rails db:seed
