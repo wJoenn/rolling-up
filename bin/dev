@@ -2,7 +2,7 @@
 
 if ! npm list concurrently >/dev/null 2>&1; then
   echo "Installing Concurrently..."
-  yarn install concurrently
+  yarn add concurrently
 fi
 
 echo "Running servers..."
