@@ -9,8 +9,8 @@ end
 
 RSpec.describe "Users::Registrations", type: :request do
   describe "POST /create" do
-    let!(:correct_user_params) { { email: "user@example.com", password: "password", username: "Joenn" } }
-    let!(:wrong_user_params) { { email: "user@example", password: "password", username: "Joenn" } }
+    let!(:correct_user_params) { { email: "user@example.com", password: "password" } }
+    let!(:wrong_user_params) { { email: "user@example", password: "password" } }
 
     context "When user is registered successfuly" do
       before do
@@ -56,6 +56,29 @@ RSpec.describe "Users::Registrations", type: :request do
       it "responds with a status code of 422" do
         expect(response).to have_http_status :unprocessable_entity
       end
+    end
+  end
+
+  describe "DELETE /users" do
+    let(:user) { User.create(email: "user@example.com", password: "password") }
+
+    before do
+      sign_in user
+      delete user_registration_path
+    end
+
+    it_behaves_like "a JSON object"
+
+    it "deletes the current user" do
+      expect(User.find_by(id: user.id)).to be nil
+    end
+
+    it "returns a confirmation message" do
+      expect(response.parsed_body["message"]).to match "Account deleted successfully."
+    end
+
+    it "returns a http status code of 200" do
+      expect(response).to have_http_status :ok
     end
   end
 end
