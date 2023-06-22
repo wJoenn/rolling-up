@@ -1,6 +1,7 @@
 {
   "name": "app",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
@@ -19,7 +20,6 @@
     "vue-router": "^4.2.2"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.2.0",
     "@types/node": "^20.1.3",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/eslint-config-typescript": "^11.0.3",
