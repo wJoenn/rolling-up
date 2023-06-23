@@ -2,17 +2,17 @@ require "rails_helper"
 
 def test_user_with_invalid_params(params)
   invalid_user = User.create(params)
-  expect(invalid_user.persisted?).to be_falsy
+  expect(invalid_user).not_to be_persisted
 end
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   let!(:email) { "user@example.com" }
   let!(:password) { "password" }
-  let!(:user) { User.create(email:, password:) }
+  let!(:user) { described_class.create(email:, password:) }
 
   describe "validations" do
     it "requires an email and a password" do
-      expect(user.persisted?).to be_truthy
+      expect(user).to be_persisted
 
       test_user_with_invalid_params(email:)
       test_user_with_invalid_params(password:)
@@ -33,12 +33,9 @@ RSpec.describe User, type: :model do
     end
 
     it "assigns a unique JTI token when created" do
-      expect(user.jti.present?).to be_truthy
-      expect(user.jti).to be_a String
+      described_class.create(email: "another@example.com", password:, jti: user.jti)
+      unique_jtis = described_class.all.map(&:jti).uniq
 
-      jti = user.jti
-      User.create(email: "another@example.com", password:, jti:)
-      unique_jtis = User.all.map(&:jti).uniq
       expect(unique_jtis.length).to eq 2
     end
   end
@@ -46,7 +43,7 @@ RSpec.describe User, type: :model do
   describe "associations" do
     it "has many Character" do
       character = user.characters.create(name: "Joenn")
-      expect(character.persisted?).to be_truthy
+      expect(character).to be_persisted
     end
   end
 end

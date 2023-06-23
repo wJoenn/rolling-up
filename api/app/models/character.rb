@@ -15,6 +15,10 @@ class Character < ApplicationRecord
     base_ac + constitution_modifier
   end
 
+  def base_stats
+    { strength:, dexterity:, constitution:, intelligence:, wisdom:, charisma:, base_ac: }
+  end
+
   def inspired?
     inspiration
   end

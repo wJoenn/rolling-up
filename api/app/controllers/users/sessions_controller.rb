@@ -3,12 +3,18 @@ class Users::SessionsController < Devise::SessionsController
 
   respond_to :json
 
+  def destroy
+    @authenticated = true
+    super
+  end
+
   private
 
-  def respond_with(_resource, _opts = {})
-    return login_successful if current_user
-
-    login_failed
+  def login_failed
+    render json: {
+      message: "User couldn't be logged in successfully.",
+      errors: ["Invalid Email or Password."]
+    }, status: :unprocessable_entity
   end
 
   def login_successful
@@ -18,17 +24,10 @@ class Users::SessionsController < Devise::SessionsController
     }, status: :ok
   end
 
-  def login_failed
+  def logout_failed
     render json: {
-      message: "User couldn't be logged in successfully.",
-      errors: ["Invalid Email or Password."]
+      message: "Hmm nothing happened."
     }, status: :unprocessable_entity
-  end
-
-  def respond_to_on_destroy
-    return logout_successful if current_user
-
-    logout_failed
   end
 
   def logout_successful
@@ -37,9 +36,15 @@ class Users::SessionsController < Devise::SessionsController
     }, status: :ok
   end
 
-  def logout_failed
-    render json: {
-      message: "Hmm nothing happened."
-    }, status: :not_found
+  def respond_to_on_destroy
+    return logout_successful if @authenticated && current_user.nil?
+
+    logout_failed
+  end
+
+  def respond_with(_resource, _opts = {})
+    return login_successful if current_user
+
+    login_failed
   end
 end

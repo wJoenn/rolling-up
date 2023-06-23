@@ -6,9 +6,6 @@ require_relative "../config/environment"
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require "rspec/rails"
 # Add additional requires below this line. Rails is not loaded until this point!
-Rails.root.glob("spec/support/helpers/**/*.rb").each do |file|
-  require file
-end
 
 Rails.root.glob("spec/support/shared_examples/**/*.rb").each do |file|
   require file
@@ -69,5 +66,4 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Devise::Test::IntegrationHelpers, type: :request
-  config.include Helpers::Authentication
 end

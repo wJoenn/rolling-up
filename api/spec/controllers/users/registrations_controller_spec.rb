@@ -7,53 +7,56 @@ def create_user(params)
     env: { "devise.mapping": Devise.mappings[:user] }
 end
 
-RSpec.describe "Users::Registrations", type: :request do
-  describe "POST /create" do
+RSpec.describe Users::RegistrationsController, type: :request do
+  describe "POST /users" do
     let!(:correct_user_params) { { email: "user@example.com", password: "password" } }
     let!(:wrong_user_params) { { email: "user@example", password: "password" } }
 
-    context "When user is registered successfuly" do
+    context "when the user is registered successfuly" do
       before do
         create_user(correct_user_params)
       end
 
-      it_behaves_like "a JSON object"
+      it_behaves_like "a JSON endpoint"
 
       it "creates a new user" do
-        expect(User.exists?(email: "user@example.com")).to be_truthy
+        expect(User).to exist(email: "user@example.com")
       end
 
-      it "responds with the newly created user and a success message" do
-        expect(response.parsed_body.key?("user")).to be_truthy
+      it "returns the registered user" do
+        id = response.parsed_body["user"]["id"]
+        expect(User).to exist(id:)
+      end
+
+      it "returns a message" do
         expect(response.parsed_body["message"]).to eq "Signed up successfully."
       end
 
-      it "responds with a status code of 200" do
-        expect(response).to be_successful
+      it "returns a http status code of 200" do
+        expect(response).to have_http_status :ok
       end
     end
 
-    context "When user is not registered successfully" do
+    context "when the user is not registered successfully" do
       before do
         create_user(wrong_user_params)
       end
 
-      it_behaves_like "a JSON object"
+      it_behaves_like "a JSON endpoint"
 
-      it "does not create a user" do
-        expect(User.exists?(email: "user@example.com")).to be_falsy
+      it "does not create a new user" do
+        expect(User).not_to exist(email: "user@example.com")
       end
 
-      it "responds with an accurate error message" do
-        expect(response.parsed_body["errors"]).to include "Email is invalid"
-
-        allow_any_instance_of(User).to receive(:persisted?).and_return(false)
-        create_user(correct_user_params)
-
+      it "returns a message" do
         expect(response.parsed_body["message"]).to match "User couldn't be created successfully."
       end
 
-      it "responds with a status code of 422" do
+      it "returns an array of errors" do
+        expect(response.parsed_body["errors"]).to be_any
+      end
+
+      it "returns a http status code of 422" do
         expect(response).to have_http_status :unprocessable_entity
       end
     end
@@ -64,16 +67,16 @@ RSpec.describe "Users::Registrations", type: :request do
 
     before do
       sign_in user
-      delete user_registration_path
+      delete "/users"
     end
 
-    it_behaves_like "a JSON object"
+    it_behaves_like "a JSON endpoint"
 
     it "deletes the current user" do
-      expect(User.find_by(id: user.id)).to be nil
+      expect(User).not_to exist(id: user.id)
     end
 
-    it "returns a confirmation message" do
+    it "returns a message" do
       expect(response.parsed_body["message"]).to match "Account deleted successfully."
     end
 

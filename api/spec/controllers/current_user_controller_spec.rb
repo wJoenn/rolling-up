@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe CurrentUserController, type: :request do
-  describe "GET /show" do
+  describe "GET /current_user" do
     let(:user) { User.create!(email: "user@example.com", password: "password") }
     let(:jwt_token) do
       token = {
@@ -16,21 +16,24 @@ RSpec.describe CurrentUserController, type: :request do
       JWT.encode(token, Rails.application.credentials.devise_jwt_secret_key!)
     end
 
-    context "When the token is valid" do
+    context "when the token is valid" do
       before do
         get "/current_user", headers: { Authorization: "Bearer #{jwt_token}" }
       end
 
-      it_behaves_like "a JSON object"
+      it_behaves_like "a JSON endpoint"
 
-      it "returns a success response" do
-        expect(response).to be_successful
+      it "returns a message" do
         expect(response.parsed_body["message"]).to eq "Logged in sucessfully."
+      end
+
+      it "returns a http status code of 200" do
+        expect(response).to have_http_status :ok
       end
     end
 
-    context "When user is not logged in" do
-      it "returns an error response" do
+    context "when user is not logged in" do
+      it "returns a http status of 302" do
         user.destroy
         get "/current_user", headers: { Authorization: "Bearer #{jwt_token}" }
 
