@@ -43,7 +43,7 @@
 
   const getTotalCharactersCreated = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/characters/total")
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/characters/total`)
       total.value = res.data.total as number
     } catch {
       // Error's handled in component

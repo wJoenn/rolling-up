@@ -5,7 +5,7 @@ import axios from "axios"
 import handleApiErrors from "../composables/handleApiErrors.ts"
 import Character from "../types/Character.ts"
 
-const API_URL = "http://localhost:3000/characters"
+const API_URL = import.meta.env.VITE_API_URL
 
 const useCharacterStore = defineStore("CharacterStore", () => {
   const errors = ref([""])

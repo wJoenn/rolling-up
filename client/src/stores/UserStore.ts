@@ -4,6 +4,8 @@ import axios from "axios"
 
 import handleApiErrors from "../composables/handleApiErrors.ts"
 
+const API_URL = import.meta.env.VITE_API_URL
+
 interface Params {
   user: {
     email: string
@@ -41,7 +43,7 @@ const useUserStore = defineStore("UserStore", () => {
 
   const loginUserWithToken = async (token: string) => {
     try {
-      const res = await axios.get("http://localhost:3000/current_user", { headers: { Authorization: token } })
+      const res = await axios.get(`${API_URL}/current_user`, { headers: { Authorization: token } })
 
       updateAuthToken(localStorage.getItem("authToken") as string)
       updateUser(res.data.user)
@@ -52,7 +54,7 @@ const useUserStore = defineStore("UserStore", () => {
 
   const logout = async () => {
     try {
-      await axios.delete("http://localhost:3000/users/sign_out", { headers: { Authorization: authToken.value } })
+      await axios.delete(`${API_URL}/users/sign_out`, { headers: { Authorization: authToken.value } })
 
       reset()
     } catch (err: any) {
@@ -67,7 +69,7 @@ const useUserStore = defineStore("UserStore", () => {
   const postRequest = async (endPoint: string, params: Params): Promise<boolean> => {
     try {
       const res = await axios.post(
-        `http://localhost:3000${endPoint}`,
+        `${API_URL}${endPoint}`,
         params,
         { headers: { "Content-Type": "application/json" } }
       )
