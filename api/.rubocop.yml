@@ -1,6 +1,7 @@
 require:
   - rubocop-performance
   - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
   NewCops: enable
@@ -36,6 +37,9 @@ Metrics/CyclomaticComplexity:
   Enabled: false
 Metrics/MethodLength:
   CountAsOne: ["array", "hash", "heredoc"]
+
+RSpec/NoExpectationExample:
+  Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: false
