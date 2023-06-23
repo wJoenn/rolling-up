@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - api
+      - api/**
 
 jobs:
   deploy:
@@ -16,6 +16,6 @@ jobs:
       - name: Setup Fly
         uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy api
-        run: exec ruby deploy
+        run: flyctl deploy ./api --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
