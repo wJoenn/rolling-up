@@ -1,7 +1,8 @@
 #!/bin/bash
 
-if [ "$@" = "deploy" ]; then
-  fly deploy ./api
+if [ "$1" = "deploy" ]; then
+  shift
+  fly deploy ./api "$@"
 else
   cd api && rails "$@"
 fi

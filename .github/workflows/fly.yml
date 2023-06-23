@@ -1,0 +1,21 @@
+name: Fly.io
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - api
+
+jobs:
+  deploy:
+    name: Deploy api
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Fly
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Deploy api
+        run: exec ruby deploy
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
