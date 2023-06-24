@@ -1,7 +1,7 @@
 <template>
   <div id="characters-index">
     <div :class="{ visible: showSideNav }" class="modal" @click="hideSideNav">
-      <Navbar />
+      <SideNavbar />
     </div>
 
     <div class="navbar">
@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
   import { onMounted, ref } from "vue"
-  import Navbar from "../../components/Navbar.vue"
+  import SideNavbar from "../../components/SideNavbar.vue"
   import useCharacterStore from "../../stores/CharacterStore.ts"
   import Character from "../../types/Character.ts"
 

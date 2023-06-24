@@ -1,0 +1,57 @@
+@keyframes jump {
+  0% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -3%;
+  }
+
+  100% {
+    translate: 0 0;
+  }
+}
+
+@keyframes pulse-rotate {
+  0% {
+    rotate: 0deg;
+    scale: 1;
+  }
+
+  50% {
+    rotate: 180deg;
+    scale: 0.98;
+  }
+
+  100% {
+    rotate: 360deg;
+    scale: 1;
+  }
+}
+
+.gif {
+  animation: jump 2s linear infinite;
+
+  div {
+    aspect-ratio: 1/1;
+    background-image: url("../../assets/images/dice.png");
+    background-size: cover;
+    width: 100%;
+    position: relative;
+
+    &::before {
+      animation: pulse-rotate 10s linear infinite;
+      background-image: linear-gradient(225deg, rgb(68, 208, 243), rgb(204, 52, 204));
+      border-radius: 50%;
+      content: "";
+      filter: blur(20px);
+      height: 100%;
+      opacity: 0.3;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%;
+      z-index: -10;
+    }
+  }
+}

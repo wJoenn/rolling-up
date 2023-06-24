@@ -4,7 +4,7 @@ import { createPinia } from "pinia"
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import {
-  faBars, faChevronLeft, faDragon, faEye, faEyeSlash, faPlus
+  faBars, faChevronLeft, faDragon, faEye, faEyeSlash, faPlus, faRightFromBracket
 } from "@fortawesome/free-solid-svg-icons"
 
 import App from "./App.vue"
@@ -15,7 +15,7 @@ import "./assets/stylesheets/application.scss"
 const app = createApp(App)
 const pinia = createPinia()
 
-library.add(faBars, faChevronLeft, faDragon, faEye, faEyeSlash, faPlus)
+library.add(faBars, faChevronLeft, faDragon, faEye, faEyeSlash, faPlus, faRightFromBracket)
 
 const loadAuthToken = async () => {
   const authToken = localStorage.getItem("authToken")
