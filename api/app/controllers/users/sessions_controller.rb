@@ -10,6 +10,11 @@ class Users::SessionsController < Devise::SessionsController
 
   private
 
+  def verify_signed_out_user
+    current_user
+    super
+  end
+
   def login_failed
     render json: {
       message: "User couldn't be logged in successfully.",

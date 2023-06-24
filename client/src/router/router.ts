@@ -31,6 +31,15 @@ const routes = [
     meta: { requiresAuth: false }
   },
   {
+    path: "/users/logout",
+    name: "Logout",
+    component: Home,
+    meta: { requiresAuth: true },
+    beforeEnter: async () => {
+      await useUserStore().logout()
+    }
+  },
+  {
     path: "/characters",
     name: "CharactersIndex",
     component: CharactersIndex,
@@ -41,7 +50,7 @@ const routes = [
     name: "CharactersNew",
     component: CharactersNew,
     meta: { requiresAuth: true }
-  }
+  },
 ]
 
 const router = createRouter({

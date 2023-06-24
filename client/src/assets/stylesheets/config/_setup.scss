@@ -50,3 +50,19 @@ nav, ul {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.modal {
+  height: 100vh;
+  height: 100svh;
+  left: 0;
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  transition: translate 0.3s ease;
+  translate: -100vw 0;
+  width: 100vw;
+
+  &.visible {
+    translate: 0 0;
+  }
+}

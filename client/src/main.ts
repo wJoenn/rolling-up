@@ -9,7 +9,7 @@ import {
 
 import App from "./App.vue"
 import router from "./router/router.ts"
-import useSessionStore from "./stores/UserStore.ts"
+import useUserStore from "./stores/UserStore.ts"
 import "./assets/stylesheets/application.scss"
 
 const app = createApp(App)
@@ -22,7 +22,7 @@ const loadAuthToken = async () => {
   const authTokenExists = authToken !== "undefined" && authToken !== null
 
   if (authTokenExists) {
-    await useSessionStore(pinia).loginUserWithToken(authToken)
+    await useUserStore(pinia).loginUserWithToken(authToken)
   }
 }
 
