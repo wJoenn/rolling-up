@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from "vue"
+  import { computed } from "vue"
   import { useRouter } from "vue-router"
   import useCharacterStore from "../../stores/CharacterStore.ts"
 
@@ -32,21 +32,13 @@
   const router = useRouter()
   const characterStore = useCharacterStore()
 
-  const errors = ref<CharacterErrors>({})
+  const errors = computed<CharacterErrors>(() => characterStore.errors)
 
   const handleSubmit = async (event: Event) => {
     const formData = new FormData(event.target as HTMLFormElement)
     const isCreated = await characterStore.createCharacter(formData)
 
-    if (!isCreated) sortErrors()
-    else router.push({ name: "CharactersIndex" })
-  }
-
-  const sortErrors = () => {
-    errors.value = {}
-    characterStore.errors.forEach(error => {
-      if (/name/i.test(error)) errors.value.name = error
-    })
+    if (isCreated) router.push({ name: "CharactersIndex" })
   }
 </script>
 

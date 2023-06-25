@@ -1,11 +1,31 @@
-const handleApiErrors = (error: any): string[] => {
-  let message: string = error.message
-  let errors = [""]
-  if (error.response.data.errors) errors = error.response.data.errors
-  if (error.response.data.message) message = error.response.data.message
+type ErrorsObject = { [key: string]: string }
+
+const sortErrors = (errors: string[] | null, fields: string[]): ErrorsObject => {
+  const errs: ErrorsObject = {}
+
+  errors?.forEach((err: string) => {
+    let isSorted = false
+
+    for (let i = 0; !isSorted; i++) {
+      if (err.toLowerCase().includes(fields[i])) {
+        errs[fields[i].toString()] = err
+        isSorted = true
+      }
+    }
+  })
+
+  return errs
+}
+
+const handleApiErrors = (error: any, ...fields: string[]): ErrorsObject => {
+  const message: string = error.response.data.message || error.message
+
+  const errors = sortErrors(error.response.data.errors as string[] | null, fields)
+
+  const values: string[] = errors ? Object.values(errors) : []
 
   // eslint-disable-next-line no-console
-  console.log(`An error occured: ${message} ${errors.join(", ")}`)
+  console.log(`An error occured: ${message} ${values.join(", ")}`)
 
   return errors
 }

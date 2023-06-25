@@ -8,18 +8,18 @@ import Character from "../types/Character.ts"
 const API_URL = import.meta.env.VITE_API_URL
 
 const useCharacterStore = defineStore("CharacterStore", () => {
-  const errors = ref([""])
+  const errors = ref({})
 
   const createCharacter = async (params: FormData): Promise<boolean> => {
     try {
-      await axios.post(API_URL, params, { headers: {
+      await axios.post(`${API_URL}/characters`, params, { headers: {
         Authorization: authToken,
         "Content-Type": "application/json"
       } })
 
       return true
     } catch (err) {
-      errors.value = handleApiErrors(err)
+      errors.value = handleApiErrors(err, "name")
 
       return false
     }
@@ -27,7 +27,7 @@ const useCharacterStore = defineStore("CharacterStore", () => {
 
   const getCharacters = async (): Promise<Character[]> => {
     try {
-      const res = await axios.get(API_URL, { headers: { Authorization: authToken } })
+      const res = await axios.get(`${API_URL}/characters`, { headers: { Authorization: authToken } })
 
       return res.data.characters
     } catch {

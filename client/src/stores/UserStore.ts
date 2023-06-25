@@ -24,7 +24,7 @@ interface User {
 const useUserStore = defineStore("UserStore", () => {
   const authToken = ref<string | null>(null)
 
-  const errors = ref([""])
+  const errors = ref({})
 
   const user = ref<User>({
     id: null,
@@ -62,6 +62,10 @@ const useUserStore = defineStore("UserStore", () => {
     }
   }
 
+  const resetErrors = () => {
+    errors.value = {}
+  }
+
   const signup = (params: Params): Promise<boolean> => postRequest("/users", params)
 
   // Private
@@ -79,7 +83,7 @@ const useUserStore = defineStore("UserStore", () => {
 
       return true
     } catch (err: any) {
-      errors.value = handleApiErrors(err)
+      errors.value = handleApiErrors(err, "email", "confirmation", "password")
 
       return false
     }
@@ -106,7 +110,7 @@ const useUserStore = defineStore("UserStore", () => {
     user.value = userData
   }
 
-  return { authToken, errors, user, isLoggedIn, login, loginUserWithToken, logout, signup }
+  return { authToken, errors, user, isLoggedIn, login, loginUserWithToken, logout, resetErrors, signup }
 })
 
 export default useUserStore

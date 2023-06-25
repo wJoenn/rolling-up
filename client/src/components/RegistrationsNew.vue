@@ -33,12 +33,12 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from "vue"
+  import { computed, ref, onUnmounted } from "vue"
   import { useRouter } from "vue-router"
   import useUserStore from "../stores/UserStore.ts"
   import togglePassword from "../composables/togglePassword.ts"
 
-  interface Errors {
+  interface UserErrors {
     email?: string
     password?: string
     passwordConfirmation?: string
@@ -48,10 +48,10 @@
   const password = ref("")
   const passwordConfirmation = ref("")
   const show = ref(false)
-  const errors = ref<Errors>({})
 
   const router = useRouter()
   const userStore = useUserStore()
+  const errors = computed<UserErrors>(() => userStore.errors)
 
   const handleClick = () => {
     togglePassword(show)
@@ -68,18 +68,10 @@
 
     const isSignedUp = await userStore.signup(params)
 
-    if (!isSignedUp) sortErrors()
-    else router.push({ name: "CharactersIndex" })
+    if (isSignedUp) router.push({ name: "CharactersIndex" })
   }
 
-  const sortErrors = () => {
-    errors.value = {}
-    userStore.errors.forEach(e => {
-      if (/email/i.test(e)) errors.value.email = e
-      else if (/confirmation/i.test(e)) errors.value.passwordConfirmation = e
-      else if (/password/i.test(e)) errors.value.password = e
-    })
-  }
+  onUnmounted(() => userStore.resetErrors())
 </script>
 
 <style scoped lang="scss">
