@@ -20,14 +20,38 @@ RSpec.describe CharactersController, type: :request do
 
     it_behaves_like "a JSON endpoint"
 
-    it "returns http success" do
-      expect(response).to have_http_status :success
+    it "returns http status code of 200" do
+      expect(response).to have_http_status :ok
     end
 
     it "returns a list of Character" do
       list = response.parsed_body["characters"]
 
       expect(list.pluck("name")).to all eq "Joenn"
+    end
+  end
+
+  describe "GET /characters/:id" do
+    let(:character) { Character.create(name: "Joenn", user:) }
+
+    before do
+      get "/characters/#{character.id}"
+    end
+
+    it_behaves_like "it requires a user to be authenticated" do
+      let(:action) { get "/characters/#{character.id}" }
+    end
+
+    it_behaves_like "a JSON endpoint"
+
+    it "returns http status code of 200" do
+      expect(response).to have_http_status :ok
+    end
+
+    it "returns a Character" do
+      character = response.parsed_body["character"]
+
+      expect(character["name"]).to eq "Joenn"
     end
   end
 
