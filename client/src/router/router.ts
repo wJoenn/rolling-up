@@ -4,6 +4,7 @@ import useUserStore from "../stores/UserStore.ts"
 import Home from "../views/Home.vue"
 import UserForm from "../views/UserForm.vue"
 import CharactersIndex from "../views/characters/Index.vue"
+import CharacterShow from "../views/characters/Show.vue"
 import CharactersNew from "../views/characters/New.vue"
 
 const verifyAuthentification = (to: RouteLocationNormalized, next: NavigationGuardNext) => {
@@ -43,6 +44,13 @@ const routes = [
     path: "/characters",
     name: "CharactersIndex",
     component: CharactersIndex,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/characters/:id",
+    name: "CharactersShow",
+    component: CharacterShow,
+    props: true,
     meta: { requiresAuth: true }
   },
   {

@@ -25,6 +25,16 @@ const useCharacterStore = defineStore("CharacterStore", () => {
     }
   }
 
+  const getCharacter = async (id: string): Promise<Character | false> => {
+    try {
+      const res = await axios.get(`${API_URL}/characters/${id}`, { headers: { Authorization: authToken } })
+
+      return res.data.character
+    } catch {
+      return false
+    }
+  }
+
   const getCharacters = async (): Promise<Character[]> => {
     try {
       const res = await axios.get(`${API_URL}/characters`, { headers: { Authorization: authToken } })
@@ -39,7 +49,7 @@ const useCharacterStore = defineStore("CharacterStore", () => {
 
   const authToken = localStorage.getItem("authToken")
 
-  return { errors, createCharacter, getCharacters }
+  return { errors, createCharacter, getCharacter, getCharacters }
 })
 
 export default useCharacterStore

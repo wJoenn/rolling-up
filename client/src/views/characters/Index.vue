@@ -14,10 +14,11 @@
 
     <div class="container">
       <div class="characters">
-        <div v-for="character in characters" :key="(character.id as number)" class="character">
+        <!-- eslint-disable-next-line max-len -->
+        <router-link v-for="character in characters" :key="(character.id as number)" :to="{ name: 'CharactersShow', params: { id: character.id } }" class="character">
           <div class="character-shadow" />
           <span>{{ character.name }}</span>
-        </div>
+        </router-link>
 
         <router-link :to="{ name: 'CharactersNew' }" class="character">
           <div class="character-shadow">
