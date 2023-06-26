@@ -6,7 +6,7 @@ const sortErrors = (errors: string[] | null, fields: string[]): ErrorsObject => 
   errors?.forEach((err: string) => {
     let isSorted = false
 
-    for (let i = 0; !isSorted; i++) {
+    for (let i = 0; !isSorted || i > errors.length; i++) {
       if (err.toLowerCase().includes(fields[i])) {
         errs[fields[i].toString()] = err
         isSorted = true
